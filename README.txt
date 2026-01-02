@@ -1,4 +1,4 @@
-# Progetto fianle di gruppo di Laboratorio di Programmazione
+# Progetto finale di gruppo di Laboratorio di Programmazione
 
 
 ### Autori:
