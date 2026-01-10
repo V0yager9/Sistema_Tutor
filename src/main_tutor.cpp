@@ -1,4 +1,4 @@
-// Autore: Davide Cossalter
+/* Autore: Davide Cossalter
 
 #include <iostream>
 #include <cctype>
@@ -41,7 +41,7 @@ int main()
 			// TODO: chiamata a funzione
 		}
 		std::string ultimo = comando.substr(comando.size() - 1, 1);											// Ultimo carattere del comando
-		std::string sub = comando.substr(9, comando.size() - 10);											// Intervallo temporale di avanzamento
+		sub = comando.substr(9, comando.size() - 10);											// Intervallo temporale di avanzamento
 		else if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (ultimo == "m"))			// Avanzamento in minuti al nuovo istante temporale
 		{
 			std::cout << "Il nuovo istante temporale e' " << "..." << std::endl;
@@ -62,10 +62,10 @@ int main()
 				std::cout << "Varco n. " << num_varchi << std:: endl;
 				std::cout << "- Numero medio di veicoli al minuto: " << "..." << std::endl;
 				std::cout << "- Numero complessivo di veicoli transitati: " << "..." << std::endl;
-			}	*/
+		}
 			std::cout << std::endl;
-			std::cout << "Velocità media dei veicoli: " /* << TODO: chiamata a variabile */ << " km/h" << std::endl;
-			std::cout << "Numero di veicoli sanzionati: " /* << TODO: chiamata a variabile */ << std::endl;
+			std::cout << "Velocità media dei veicoli: " /* << TODO: chiamata a variabile  << " km/h" << std::endl;
+			std::cout << "Numero di veicoli sanzionati: " /* << TODO: chiamata a variabile  << std::endl;
 		}
 		else if(comando == "exit")																			// Terminazione del programma
 		{
@@ -95,4 +95,4 @@ bool verificaNumeri(const std::string& numeri)
 		} 
 	} 
 	return !numeri.empty(); 
-}
+}*/
