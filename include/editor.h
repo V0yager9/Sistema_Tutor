@@ -12,8 +12,13 @@
 class Editor
 { 
 	public:
+		Editor();  // Costruttore vuoto
+
 		// Inizializzazione della directory di destinazione del file testuale
 		Editor(std::string title);
+
+		// Distruttore
+		~Editor();
 		
 		// Operazione di lettura del file testuale
 		std::string reader();
