@@ -34,8 +34,8 @@ std::string Simulatore::randomPlate() {  //Genera una targa casuale nel formato 
 }
 
 void Simulatore::run() {
-    std::ofstream runs("data/runs.txt");
-    std::ofstream pass("data/passages.txt");
+    std::ofstream runs("data/Runs.txt");
+    std::ofstream pass("data/Passages.txt");
 
     double tempoCorrente = 0.0; //Tempo globale del simulatore in secondi
 
@@ -43,13 +43,13 @@ void Simulatore::run() {
 
         std::string targa = randomPlate();  //Genero la targa del veicolo
 
-        int ingresso = randomInt(0, m_hw.exits().size() - 2);
-        int uscita = randomInt(ingresso + 1, m_hw.exits().size() - 1);
+        int ingresso = randomInt(0, m_hw.getSvincoli().size() - 2);
+        int uscita = randomInt(ingresso + 1, m_hw.getSvincoli().size() - 1);
 
-        double distanza = m_hw.exits()[uscita].km - m_hw.exits()[ingresso].km;
+        double distanza = m_hw.getSvincoli()[uscita].km - m_hw.getSvincoli()[ingresso].km;
 
         //Scrivo i dati nel file runs.txt
-        runs << targa << " " << m_hw.exits()[ingresso].id << " " << m_hw.exits()[uscita].id << " " << tempoCorrente << " ";
+        runs << targa << " " << m_hw.getSvincoli()[ingresso].id << " " << m_hw.getSvincoli()[uscita].id << " " << tempoCorrente << " ";
 
         double percorso = 0.0;
         double tempoVeicolo = tempoCorrente;
@@ -63,8 +63,8 @@ void Simulatore::run() {
 
             runs << "<" << velocita << " " << secondi << "> ";
 
-            for (const auto& v : m_hw.gates()) {    //Controllo passaggi ai varchi
-                double posizione = v.km - m_hw.exits()[ingresso].km;
+            for (const auto& v : m_hw.getVarchi()) {    //Controllo passaggi ai varchi
+                double posizione = v.km - m_hw.getSvincoli()[ingresso].km;
 
                 if (posizione >= percorso && posizione < percorso + kmPercorsi) {
                     double deltaT = (posizione - percorso) / velocita * 3600.0;
@@ -74,7 +74,6 @@ void Simulatore::run() {
                          << tempoVeicolo + deltaT << "\n";
                 }
             }
-
             percorso += kmPercorsi;
             tempoVeicolo += secondi;
         }

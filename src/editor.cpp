@@ -1,6 +1,6 @@
 // Autore: Davide Cossalter
 
-#include "../include/Editor.h"
+#include "../include/editor.h"
 
 
 // Inizializzazione della directory di destinazione del file testuale
