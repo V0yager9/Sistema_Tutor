@@ -30,18 +30,23 @@ int main()
         std::cout << "- exit" << std::endl;
         std::cout << "---------------------------------------------------------------" << std::endl;
         std::getline(std::cin, comando);
-		std::string sub = comando.substr(9, comando.size() - 9);											// Intervallo temporale di avanzamento	
+		std::string ultimo = comando.substr(comando.size() - 1, 1);											// Ultimo carattere del comando
+		std::string sub = "";																				// Intervallo temporale di avanzamento															
 		int istante = 0;		
-
+		
+		// Selezione della tipologia di intervallo temporale
+		if(ultimo == "m")																					// La presenza di "m" indica la selezione di un intervallo in minuti
+			sub = comando.substr(9, comando.size() - 10);													// Intervallo temporale in minuti
+		else
+			sub = comando.substr(9, comando.size() - 9);													// Intervallo temporale in secondi
+		
         // Gestione delle opzioni
-		if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)))									// Avanzamento in secondi al nuovo istante temporale
+		if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (verificaNumeri(ultimo)))		// Avanzamento in secondi al nuovo istante temporale
 		{
 			std::cout << "Il nuovo istante temporale e' " << "..." << std::endl;
 			istante = std::stoi(sub);												
 			// TODO: chiamata a funzione
 		}
-		std::string ultimo = comando.substr(comando.size() - 1, 1);											// Ultimo carattere del comando
-		std::string sub = comando.substr(9, comando.size() - 10);											// Intervallo temporale di avanzamento
 		else if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (ultimo == "m"))			// Avanzamento in minuti al nuovo istante temporale
 		{
 			std::cout << "Il nuovo istante temporale e' " << "..." << std::endl;
@@ -77,7 +82,7 @@ int main()
 		}
 		
         std::cout << std::endl;
-    } while (!terminazione);
+    }while (!terminazione);
 
     std::cout << "Il programma e' terminato." << std::endl;
     return 0;
