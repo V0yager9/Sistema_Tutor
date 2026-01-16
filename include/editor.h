@@ -12,8 +12,13 @@
 class Editor
 { 
 	public:
+		Editor();  // Costruttore vuoto
+
 		// Inizializzazione della directory di destinazione del file testuale
 		Editor(std::string title);
+
+		// Distruttore
+		~Editor();
 		
 		// Operazione di lettura del file testuale
 		std::string reader();
@@ -22,7 +27,7 @@ class Editor
 		void writer(std::string change);	
 		
 		// Operazione di chiusura del file testuale
-		void closer();
+		void closeDoc();
 			
 	private:
 		// Directory dei file testuali
