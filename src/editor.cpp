@@ -47,7 +47,7 @@ void Editor::writer(std::string change)
     }
 }
 
-void Editor::closer()
+void Editor::closeDoc()
 {
     if(document.is_open())
     {
