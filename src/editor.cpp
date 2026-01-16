@@ -29,10 +29,23 @@ Editor::~Editor()
 
 std::string Editor::reader()
 {
-    std::ifstream in(dir.c_str());	// Apro un ifstream separato per la lettura
+    // Apro un ifstream separato per la lettura.
+    // Restituisco l'intero contenuto del file (tutte le righe).
+    std::ifstream in(dir.c_str());
+    if(!in.is_open())
+    {
+        std::cout << "Errore di apertura del file testuale" << std::endl;
+        return "";
+    }
+
+    std::string content;
     std::string line;
-    std::getline(in, line);
-    return line;
+    while (std::getline(in, line))
+    {
+        content += line;
+        content += "\n";
+    }
+    return content;
 }
 
 void Editor::writer(std::string change)
