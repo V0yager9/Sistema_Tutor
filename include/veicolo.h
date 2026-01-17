@@ -5,11 +5,6 @@
 #include <vector>
 #include <utility>
 
-/*
- * Classe Veicolo
- * Rappresenta un veicolo che percorre l'autostrada con un certo profilo di velocità
- */
-
 class Veicolo {
 public:
     // Costruttori

@@ -4,11 +4,6 @@
 #include <vector>
 #include <string>
 
-/*
- * Classe Autostrada
- * Gestisce la struttura dell'autostrada: varchi e svincoli
- */
-
 class Autostrada {
 public:
     struct Varco {

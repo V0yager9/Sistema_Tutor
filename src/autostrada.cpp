@@ -1,23 +1,30 @@
 #include "../include/autostrada.h"
+#include "../include/editor.h"
 #include <fstream>
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 Autostrada::Autostrada() {}
 
 // Lettura file Highway.txt
 bool Autostrada::caricaDaFile(const std::string& nomeFile) {
-    std::ifstream file(nomeFile);
-    if (!file.is_open())
+    // Uso la classe Editor per leggere il file di configurazione.
+    // Editor si aspetta il solo nome (es. "highway.txt") e cerca in "data/".
+    Editor editor(nomeFile);
+    const std::string contenuto = editor.reader();
+    editor.closeDoc();
+    if (contenuto.empty())
         return false;
 
     m_varchi.clear();
     m_svincoli.clear();
 
+    std::istringstream iss(contenuto); //transformo in stream per leggere
     double km;
     char tipo;
 
-    while (file >> km >> tipo) {
+    while (iss >> km >> tipo) {
         if (tipo == 'V') {
             m_varchi.push_back({0, km});
         } else if (tipo == 'S') {

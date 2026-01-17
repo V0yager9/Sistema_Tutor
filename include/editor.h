@@ -27,7 +27,7 @@ class Editor
 		void writer(std::string change);	
 		
 		// Operazione di chiusura del file testuale
-		void closer();
+		void closeDoc();
 			
 	private:
 		// Directory dei file testuali

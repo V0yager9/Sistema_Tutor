@@ -120,6 +120,6 @@ void Simulatore::run() {
         tempoCorrente += randomDouble(0.5, 10.0);   // Incremento il tempo per la partenza del prossimo veicolo
     }
     // Chiusura dei file aperti in Editor
-    runs.closer();
-    pass.closer();
+    runs.closeDoc();
+    pass.closeDoc();
 }

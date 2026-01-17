@@ -11,7 +11,6 @@ set(HEADERS
 	include/autostrada.h
 	include/editor.h
 	include/simulatore.h
-	include/tempo.h
 	include/tutor.h
 	include/veicolo.h
 )
@@ -19,10 +18,9 @@ set(HEADERS
 set(SOURCES
 	src/main_simulazione.cpp
 	src/main_tutor.cpp
-	src/autostrada.cpp
 	src/editor.cpp
+	src/autostrada.cpp
 	src/simulatore.cpp
-	src/tempo.cpp
 	src/tutor.cpp
 	src/veicolo.cpp
 )
