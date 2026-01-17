@@ -15,7 +15,7 @@ bool verificaNumeri(const std::string& s);
 // Gestione delle interazioni con l'utente
 int main()
 {
-
+	Tutor sistema;						// Controllo del transito dei veicoli
     std::string comando;				// Input dell'utente
     bool terminazione = false;			// Terminazione del programma
 	Editor modifica;					// Flusso di dati dei file testuali
@@ -32,7 +32,7 @@ int main()
         std::getline(std::cin, comando);
 		std::string ultimo = comando.substr(comando.size() - 1, 1);											// Ultimo carattere del comando
 		std::string sub = "";																				// Intervallo temporale di avanzamento															
-		int istante = 0;		
+		double istante = 0.0;		
 		
 		// Selezione della tipologia di intervallo temporale
 		if(ultimo == "m")																					// La presenza di "m" indica la selezione di un intervallo in minuti
@@ -43,24 +43,24 @@ int main()
         // Gestione delle opzioni
 		if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (verificaNumeri(ultimo)))		// Avanzamento in secondi al nuovo istante temporale
 		{
-			std::cout << "Il nuovo istante temporale e' " << "..." << std::endl;
-			istante = std::stoi(sub);												
+			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
+			istante = std::stod(sub);												
 			// TODO: chiamata a funzione
 		}
-		else if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (ultimo == "m"))			// Avanzamento in minuti al nuovo istante temporale
+		else if(comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (ultimo == "m"))			// Avanzamento in minuti al nuovo istante temporale
 		{
-			std::cout << "Il nuovo istante temporale e' " << "..." << std::endl;
-			istante = std::stoi(sub);												
+			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
+			istante = std::stod(sub);												
 			//TODO: chiamata a funzione
 		}
 		else if(comando == "reset")																			// Reset completo del sistema
 		{
-			//TODO: chiamata a funzione;
+			sistema.reset();
 			std::cout << "Il sistema e' stato riportato allo stadio iniziale" << std::endl;
 		}
 		else if(comando == "stats")																			// Stampa delle statistiche
 		{
-			//num_varchi = TODO: dim vector varchi;
+			//num_varchi = TODO: quantità varchi;
 			std::cout << "Statistiche del sistema " << std::endl;
 			/*TODO: for(int i = 0; i < num_varchi; i ++)
 			{
@@ -82,7 +82,7 @@ int main()
 		}
 		
         std::cout << std::endl;
-    }while (!terminazione);
+    } while (!terminazione);
 
     std::cout << "Il programma e' terminato." << std::endl;
     return 0;
@@ -90,14 +90,30 @@ int main()
 }
 
 // Verifica della presenza esclusiva di numeri all'interno di una stringa
-bool verificaNumeri(const std::string& numeri) 
-{ 
-	for (unsigned char cifra : numeri)																			
-	{ 
-		if (!std::isdigit(cifra)) 																			// Scansione del contenuto della sottostringa
-		{ 
-			return false; 
-		} 
-	} 
-	return !numeri.empty(); 
+bool verificaNumeri(const std::string& numeri)
+{
+    if(numeri.empty())
+	{
+        return false;												// Rilevamento di stringa vuota
+	}
+    if((numeri.front() == '.') || (numeri.back() == '.'))			// Il punto non può essere né primo né ultimo
+   	{
+		return false;
+	}
+    bool puntoTrovato = false;
+    for(unsigned char c : numeri)									// Scansione del contenuto della stringa						
+    {
+        if(c == '.') 
+		{
+            if(puntoTrovato)
+                return false;   									// Rilevamento di più punti
+            puntoTrovato = true;
+            continue;
+        }
+        if(!std::isdigit(c))
+            return false;											// Rilevamento di carattere illegale
+    }
+    return true;													// La stringa contiene solo caratteri numerici
 }
+
+
