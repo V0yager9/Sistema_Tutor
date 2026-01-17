@@ -7,24 +7,20 @@
 
 class Veicolo {
 public:
-    // Costruttori
     Veicolo();
     Veicolo(const std::string& targa,
             int svincoloIngresso,
             int svincoloUscita,
             double istantePartenza);
 
-    // Getter
     const std::string& getTarga() const;
     int getSvincoloIngresso() const;
     int getSvincoloUscita() const;
     double getIstantePartenza() const;
 
-    // Profilo di velocità
     void aggiungiIntervallo(double velocitaKmH, double durataSecondi);
     const std::vector<std::pair<double, double>>& getProfiloVelocita() const;
 
-    // Utilità
     double distanzaPercorsa() const;
 
 private:
@@ -33,8 +29,7 @@ private:
     int m_svincoloUscita;
     double m_istantePartenza;
 
-    // coppia <velocità km/h, durata in secondi>
     std::vector<std::pair<double, double>> m_profiloVelocita;
 };
 
-#endif // VEICOLO_H
+#endif

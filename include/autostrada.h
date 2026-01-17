@@ -16,17 +16,13 @@ public:
         double km;
     };
 
-    // Costruttori
     Autostrada();
 
-    // Caricamento da file
     bool caricaDaFile(const std::string& nomeFile);
 
-    // Getter
     const std::vector<Varco>& getVarchi() const;
     const std::vector<Svincolo>& getSvincoli() const;
 
-    // Utilità
     double getKmVarco(int id) const;
     double getKmSvincolo(int id) const;
 
@@ -37,9 +33,13 @@ private:
     std::vector<Varco> m_varchi;
     std::vector<Svincolo> m_svincoli;
 
-    // Metodi di supporto
     void assegnaId();
     bool verificaVincoli() const;
 };
 
-#endif // AUTOSTRADA_H
+template <typename T>
+bool confrontaPerKm(const T& a, const T& b) {
+    return a.km < b.km;
+}
+
+#endif

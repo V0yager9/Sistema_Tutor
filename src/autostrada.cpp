@@ -7,48 +7,76 @@
 
 Autostrada::Autostrada() {}
 
-// Lettura file Highway.txt
+// lettura file Highway.txt
 bool Autostrada::caricaDaFile(const std::string& nomeFile) {
-    // Uso la classe Editor per leggere il file di configurazione.
-    // Editor si aspetta il solo nome (es. "highway.txt") e cerca in "data/".
     Editor editor(nomeFile);
     const std::string contenuto = editor.reader();
     editor.closeDoc();
     if (contenuto.empty())
-        return false;
+        throw std::runtime_error("Highway.txt vuoto o non leggibile");
 
     m_varchi.clear();
     m_svincoli.clear();
 
-    std::istringstream iss(contenuto); //transformo in stream per leggere
-    double km;
-    char tipo;
+    // lettura robusta riga-per-riga (il file e' scritto a mano)
+    std::istringstream iss(contenuto);
+    std::string linea;
+    int nlinea = 0;
 
-    while (iss >> km >> tipo) {
+    while (std::getline(iss, linea)) {
+        ++nlinea;
+        std::istringstream ls(linea);
+
+        // salta righe vuote o contenenti solo spazi
+        ls >> std::ws;
+        if (ls.eof())
+            continue;
+
+        double km = 0.0;
+        char tipo = '\0';
+        if (!(ls >> km >> tipo)) {
+            throw std::runtime_error("Formato non valido in Highway.txt alla riga " + std::to_string(nlinea) + ": atteso '<distanza_km> <V|S>'");
+        }
+
+        // verifica che non ci siano token extra dopo i due richiesti
+        ls >> std::ws;
+        if (!ls.eof()) {
+            throw std::runtime_error("Formato non valido in Highway.txt alla riga " + std::to_string(nlinea) + ": presenti token extra");
+        }
+
+        if (km < 0.0) {
+            throw std::runtime_error("Valore distanza negativo in Highway.txt alla riga " + std::to_string(nlinea));
+        }
+
         if (tipo == 'V') {
             m_varchi.push_back({0, km});
         } else if (tipo == 'S') {
             m_svincoli.push_back({0, km});
         } else {
-            return false;
+            throw std::runtime_error("Tipo non valido in Highway.txt alla riga " + std::to_string(nlinea) +": usare 'V' (Varco) o 'S' (Svincolo) ");
         }
     }
 
+    if (m_varchi.empty() && m_svincoli.empty())
+        throw std::runtime_error("Highway.txt non contiene varchi/svincoli");
+
     assegnaId();
-    return verificaVincoli();
+
+    if (!verificaVincoli()) {
+        throw std::runtime_error(
+            "Highway.txt non conforme ai vincoli: "
+            "almeno 2 varchi, almeno 1 svincolo prima del primo varco e 1 dopo l'ultimo, "
+            "distanza minima varco-svincolo = 1 km.");
+    }
+
+    return true;
 }
 
-// Assegna ID ordinati per km
-void Autostrada::assegnaId() {
-    std::sort(m_varchi.begin(), m_varchi.end(),
-              [](const Varco& a, const Varco& b) {
-                  return a.km < b.km;
-              });
 
-    std::sort(m_svincoli.begin(), m_svincoli.end(),
-              [](const Svincolo& a, const Svincolo& b) {
-                  return a.km < b.km;
-              });
+// assegna ID ordinati per km, confrontPerKm è un template in autostrada.h
+void Autostrada::assegnaId() {
+    std::sort(m_varchi.begin(), m_varchi.end(), confrontaPerKm<Varco>);
+    std::sort(m_svincoli.begin(), m_svincoli.end(), confrontaPerKm<Svincolo>);
 
     for (size_t i = 0; i < m_varchi.size(); ++i)
         m_varchi[i].id = static_cast<int>(i + 1);
@@ -57,7 +85,7 @@ void Autostrada::assegnaId() {
         m_svincoli[i].id = static_cast<int>(i + 1);
 }
 
-// Verifica vincoli del progetto
+// verifica vincoli del progetto
 bool Autostrada::verificaVincoli() const {
     if (m_varchi.size() < 2)
         return false;
@@ -92,7 +120,6 @@ bool Autostrada::verificaVincoli() const {
     return true;
 }
 
-// Getter
 const std::vector<Autostrada::Varco>& Autostrada::getVarchi() const {
     return m_varchi;
 }
