@@ -43,15 +43,16 @@ int main()
         // Gestione delle opzioni
 		if((comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (verificaNumeri(ultimo)))		// Avanzamento in secondi al nuovo istante temporale
 		{
-			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
 			istante = std::stod(sub);												
 			// TODO: chiamata a funzione
+			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
 		}
 		else if(comando.substr(0, 9) == "set_time ") && (verificaNumeri(sub)) && (ultimo == "m"))			// Avanzamento in minuti al nuovo istante temporale
 		{
-			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
-			istante = std::stod(sub);												
+			istante = std::stod(sub);
+			istante = istante * 60;																			// Conversione in secondi
 			//TODO: chiamata a funzione
+			std::cout << "Il nuovo istante temporale e' " << sistema.getTempo() << std::endl;
 		}
 		else if(comando == "reset")																			// Reset completo del sistema
 		{

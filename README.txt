@@ -21,3 +21,8 @@
 	make
 - A compilazione terminata si può procedere all'esecuzione del programma nel terminale:
 	./ProgettoFinale
+
+### Considerazioni
+- La generazione delle date di ingresso dei veicoli non è stata implementata
+- Il motivo di questa scelta è che non ne sono stati riscontrati utilizzi utili né ne è stata richiesta la stampa sui documenti testuali della cartella Data
+
