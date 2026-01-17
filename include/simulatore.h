@@ -10,9 +10,9 @@ public:
     void run();
 
 private:
-    const Autostrada& m_hw;
+    const Autostrada& mhw;
 
-    std::string randomPlate();
+    std::string randomTarga();
 
     int randomInt(int min, int max);
     double randomDouble(double min, double max);
