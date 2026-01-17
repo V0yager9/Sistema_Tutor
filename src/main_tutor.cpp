@@ -90,27 +90,6 @@ int main()
 }
 
 // Verifica della presenza esclusiva di numeri all'interno di una stringa
-bool verificaNumeri(const std::string& numeri) 
-
-	if(numeri.empty()) 
-		return false;																// Una stringa vuota non e' valida
-	for(std::size_t i = 0; i < numeri.size(); ++i)									// Scansione del contenuto della sottostringa						
-	{ 
-		unsigned char cifra = numeri[i]; 
-		if(cifra == '.') 
-		{
-			if((i == 0) || (i == numeri.size() - 1))  
-				return false; 														// Il punto non può essere né primo né ultimo
-			continue; 																// Ignora il punto nelle altre posizioni
-		}
-		if(!std::isdigit(cifra))
-		{ 
-			return false; 															// Rilevamento di carattere illegale
-		} 
-	} 
-	return true; 	
-
-// Verifica della presenza esclusiva di numeri all'interno di una stringa
 bool verificaNumeri(const std::string& numeri)
 {
     if(numeri.empty())
