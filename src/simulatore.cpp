@@ -8,27 +8,28 @@
 
 static const int VEICOLI = 10000;
 
-Simulatore::Simulatore(const Autostrada& hw) : m_hw(hw) {
+Simulatore::Simulatore(const Autostrada& hw) : mhw(hw) {
     std::srand(static_cast<unsigned>(std::time(nullptr)));  // Inizializzo il generatore di numeri casuali
 }
 
 int Simulatore::randomInt(int min, int max) {
-    return min + std::rand() % (max - min + 1); // Ritorna un intero nell'intervallo [min, max]
+    return min + rand() % (max - min + 1); // Ritorna un intero nell'intervallo min, max
 }
 
 double Simulatore::randomDouble(double min, double max) {
-    return min + (max - min) * (std::rand() / static_cast<double>(RAND_MAX)); // Ritorna un double nell'intervallo [min, max]
+    return min + ((double)rand() / RAND_MAX) * (max - min); // Ritorna un double nell'intervallo [min, max]
 }
 
-std::string Simulatore::randomPlate() {  // Genera una targa casuale nel formato AA000AA
+std::string Simulatore::randomTarga() {  // Genera una targa casuale nel formato AA000AA
     std::string t;
 
     t += char('A' + randomInt(0, 25));
     t += char('A' + randomInt(0, 25));
 
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 3; i++){
         t += char('0' + randomInt(0, 9));
-
+    }
+    
     t += char('A' + randomInt(0, 25));
     t += char('A' + randomInt(0, 25));
 
@@ -41,12 +42,11 @@ void Simulatore::run() {
 
     double tempoCorrente = 0.0; // Tempo globale del simulatore in secondi
 
-    const auto& svincoli = m_hw.getSvincoli();
-    const auto& varchi   = m_hw.getVarchi();   // Assumo ordinati per km
+    auto& svincoli = mhw.getSvincoli();
+    auto& varchi   = mhw.getVarchi();   // Assumo ordinati per km
 
-    for (int i = 0; i < VEICOLI; ++i) {
-
-        std::string targa = randomPlate();  // Genero la targa del veicolo
+    for (int i = 0; i < VEICOLI; i++) {
+        std::string targa = randomTarga();  // Genero la targa del veicolo
 
         int ingresso = randomInt(0, static_cast<int>(svincoli.size()) - 2);
         int uscita   = randomInt(ingresso + 1, static_cast<int>(svincoli.size()) - 1);
@@ -76,6 +76,7 @@ void Simulatore::run() {
 
         while (percorso < distanza) {   // Genero il profilo di velocità del veicolo
             int velocita = randomInt(80, 190);
+
             int minuti   = randomInt(5, 15);
             double secondi = minuti * 60.0;
 
