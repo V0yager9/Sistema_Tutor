@@ -1,3 +1,5 @@
+// Autore: Michele Coffele
+
 #include "../include/autostrada.h"
 #include "../include/simulatore.h"
 
@@ -9,7 +11,7 @@
 int main() {
     try {
         Autostrada hw;
-        hw.caricaDaFile("data/highway.txt");
+        hw.caricaDaFile("highway.txt");
 
         std::cout << "File highway.txt caricato correttamente\n";
 
@@ -25,7 +27,7 @@ int main() {
         return 0;
 
     } catch (const std::exception& e) {
-        std::cerr << "Errore: " << e.what() << "\n";
+        std::cerr << "Errore!!!\n";
         return 1;
     }
 }
