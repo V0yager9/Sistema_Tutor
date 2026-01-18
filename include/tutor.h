@@ -29,7 +29,7 @@ class Tutor
 		struct Stat
 		{ 
 			std::string targa; 
-			int varco1, varco2; 
+			int v; 
 			double velocita; 
 			bool infrazione; 
 		}; 
@@ -38,7 +38,7 @@ class Tutor
 		double distanzaTraVarchi = 0.0;		 		// Unità di misura: chilometri
 		const double limite = 130.0; 				// Unità di misura: chilometri orari
 		
-		// Nuovo istante temporale
+		// Avanzamento al nuovo istante temporale
 		void setTempo(double intervalloTemporale);
 		
 	public: 
@@ -49,7 +49,7 @@ class Tutor
 		double getTempo() const;
 		
 		// Avanza il tempo simulato 
-		bool avanzaTempo(double intervalloTemporale);
+		void avanzaTempo(double intervalloTemporale);
 		
 		// Registra un passaggio 
 		void registraPassaggio(const std::string& targa, int varco);  
@@ -64,3 +64,5 @@ class Tutor
 
 
 #endif
+
+
