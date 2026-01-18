@@ -10,6 +10,8 @@ public:
     void run();
 
 private:
+    const int VEICOLI = 10000;
+    
     const Autostrada& mhw;
 
     std::string randomTarga();

@@ -6,8 +6,6 @@
 #include <cstdlib>
 #include <ctime>
 
-static const int VEICOLI = 10000;
-
 Simulatore::Simulatore(const Autostrada& hw) : mhw(hw) {
     std::srand(static_cast<unsigned>(std::time(nullptr)));  // Inizializzo il generatore di numeri casuali
 }

@@ -10,7 +10,7 @@ Tutor::Tutor()
 }
 
 // Avanzamento al nuovo istante temporale
-void Tutor:setTempo(double intervallo)
+void Tutor::setTempo(double intervallo)
 {
 	tempoCorrente += intervallo;
 }
