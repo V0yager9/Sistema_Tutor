@@ -29,8 +29,6 @@ Editor::~Editor()
 
 std::string Editor::reader()
 {
-    // Apro un ifstream separato per la lettura.
-    // Restituisco l'intero contenuto del file (tutte le righe).
     std::ifstream in(dir.c_str());
     if(!in.is_open())
     {

@@ -16,7 +16,7 @@ public:
         double km;
     };
 
-    Autostrada();
+    Autostrada(); // costruttore di default
 
     bool caricaDaFile(const std::string& nomeFile);
 
@@ -30,14 +30,14 @@ public:
     int numeroSvincoli() const;
 
 private:
-    std::vector<Varco> m_varchi;
-    std::vector<Svincolo> m_svincoli;
+    std::vector<Varco> varchi;
+    std::vector<Svincolo> svincoli;
 
     void assegnaId();
     bool verificaVincoli() const;
 };
 
-template <typename T>
+template <typename T> // funzione di confronto per l'ordinamento
 bool confrontaPerKm(const T& a, const T& b) {
     return a.km < b.km;
 }
