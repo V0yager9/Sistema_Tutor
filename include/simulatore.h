@@ -6,12 +6,12 @@
 
 class Simulatore {
 public:
-    explicit Simulatore(const Autostrada& hw);
+    Simulatore(const Autostrada& hw);
     void run();
 
 private:
     const int VEICOLI = 10000;
-    
+
     const Autostrada& mhw;
 
     std::string randomTarga();
