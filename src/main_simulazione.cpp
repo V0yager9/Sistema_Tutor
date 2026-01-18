@@ -1,3 +1,5 @@
+// Autore: Michele Coffele
+
 #include "../include/autostrada.h"
 #include "../include/simulatore.h"
 

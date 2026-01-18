@@ -1,3 +1,5 @@
+// Autore: Michele Coffele
+
 #include "../include/simulatore.h"
 #include "../include/editor.h"
 
