@@ -22,7 +22,9 @@
 - A compilazione terminata si può procedere all'esecuzione del programma nel terminale:
 	./ProgettoFinale
 
-### Considerazioni
+### Dettagli tecnici
 - La generazione delle date di ingresso dei veicoli non è stata implementata
-- Il motivo di questa scelta è che non ne sono stati riscontrati utilizzi utili né ne è stata richiesta la stampa sui documenti testuali della cartella Data
+- Motivazioni della scelta: 
+	- Non ne sono stati riscontrati utilizzi utili 
+	- Non ne è stata richiesta la stampa sui documenti testuali della cartella "data"
 

@@ -8,8 +8,8 @@ set(CMAKE_CXX_FLAGS "-O2")
 project(ProgettoFinale)
 
 set(HEADERS
-	include/autostrada.h
 	include/editor.h
+	include/autostrada.h
 	include/simulatore.h
 	include/tutor.h
 	include/veicolo.h
@@ -21,8 +21,8 @@ set(SOURCES
 	src/editor.cpp
 	src/autostrada.cpp
 	src/simulatore.cpp
-	src/tutor.cpp
 	src/veicolo.cpp
+	src/tutor.cpp
 )
 
 

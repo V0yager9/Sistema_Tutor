@@ -12,19 +12,23 @@
 class Editor
 { 
 	public:
-		Editor();  // Costruttore vuoto
+		// Costruttore di default
+		Editor();
 
 		// Inizializzazione della directory di destinazione del file testuale
-		Editor(std::string title);
+		Editor(std::string titolo);
 
 		// Distruttore
 		~Editor();
 		
+		// Operazione di modifica della directory
+		void setDir(std::string titolo);
+		
 		// Operazione di lettura del file testuale
 		std::string reader();
 		
-		// Operazione di scrittura del file testuale
-		void writer(std::string change);	
+		// Operazione di scrittura sul file testuale
+		void writer(std::string modifica);	
 		
 		// Operazione di chiusura del file testuale
 		void closeDoc();
@@ -34,7 +38,7 @@ class Editor
 		std::string dir;
 		
 		// Flusso dei dati
-		std::fstream document;
+		std::fstream documento;
 };
 
 #endif
