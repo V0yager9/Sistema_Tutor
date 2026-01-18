@@ -1,3 +1,5 @@
+// Autore: Giovanni Arcaro
+
 #ifndef AUTOSTRADA_H
 #define AUTOSTRADA_H
 
@@ -37,9 +39,9 @@ private:
     bool verificaVincoli() const;
 };
 
-template <typename T> // funzione di confronto per l'ordinamento
-bool confrontaPerKm(const T& a, const T& b) {
-    return a.km < b.km;
+template <typename T> 
+bool confrontaPerKm(const T& a, const T& b) { // funzione di confronto per l'ordinamento
+    return a.km < b.km; 
 }
 
 #endif

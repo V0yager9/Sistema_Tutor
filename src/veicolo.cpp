@@ -1,3 +1,5 @@
+// Autore: Giovanni Arcaro
+
 #include "../include/veicolo.h"
 
 // costruttore di default

@@ -1,3 +1,5 @@
+// Autore: Giovanni Arcaro
+
 #include "../include/autostrada.h"
 #include "../include/editor.h"
 #include <fstream>
@@ -89,11 +91,11 @@ void Autostrada::assegnaId() {
 }
 
 bool Autostrada::verificaVincoli() const {
-    if (varchi.size() < 2){
-        return false;
+    if (varchi.size() < 2){ //controlla che ci siano almeno 2 varchi
+        return false; 
     }
 
-    if (svincoli.empty()){
+    if (svincoli.empty()){ //controlla che ci sia almeno 1 svincolo
         return false;
     }
         
@@ -104,16 +106,16 @@ bool Autostrada::verificaVincoli() const {
     bool dopo = false;
 
     for (int i = 0; i < svincoli.size(); ++i) {
-        if (svincoli[i].km <= primoVarco - 1.0) {
+        if (svincoli[i].km <= primoVarco - 1.0) { //controlla che ci sia almeno uno svincolo prima del primo varco
             prima = true;
         }
 
-        if (svincoli[i].km >= ultimoVarco + 1.0) {
+        if (svincoli[i].km >= ultimoVarco + 1.0) { //controlla che ci sia almeno uno svincolo dopo l'ultimo varco
             dopo = true;
         }
     }
 
-    if (!prima || !dopo){
+    if (!prima || !dopo){ //se manca uno dei due svincoli richiesti
         return false;
     }
 

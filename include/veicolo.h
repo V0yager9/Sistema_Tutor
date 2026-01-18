@@ -1,3 +1,5 @@
+// Autore: Giovanni Arcaro
+
 #ifndef VEICOLO_H
 #define VEICOLO_H
 
