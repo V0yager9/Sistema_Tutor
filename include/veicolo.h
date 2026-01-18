@@ -1,3 +1,5 @@
+// Autore: Giovanni Arcaro
+
 #ifndef VEICOLO_H
 #define VEICOLO_H
 
@@ -7,7 +9,7 @@
 
 class Veicolo {
 public:
-    Veicolo();
+    Veicolo(); // costruttore di default
     Veicolo(const std::string& targa,
             int svincoloIngresso,
             int svincoloUscita,
@@ -24,12 +26,12 @@ public:
     double distanzaPercorsa() const;
 
 private:
-    std::string m_targa;
-    int m_svincoloIngresso;
-    int m_svincoloUscita;
-    double m_istantePartenza;
+    std::string targa;
+    int svincoloIngresso;
+    int svincoloUscita;
+    double istantePartenza;
 
-    std::vector<std::pair<double, double>> m_profiloVelocita;
+    std::vector<std::pair<double, double>> profiloVelocita;
 };
 
 #endif

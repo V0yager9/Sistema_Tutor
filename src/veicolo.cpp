@@ -1,50 +1,52 @@
+// Autore: Giovanni Arcaro
+
 #include "../include/veicolo.h"
 
 // costruttore di default
 Veicolo::Veicolo()
-    : m_targa(""),
-      m_svincoloIngresso(-1),
-      m_svincoloUscita(-1),
-      m_istantePartenza(0.0) {}
+    : targa(""),
+      svincoloIngresso(-1),
+      svincoloUscita(-1),
+      istantePartenza(0.0) {}
 
 Veicolo::Veicolo(const std::string& targa,int svincoloIngresso,int svincoloUscita,double istantePartenza)
-    : m_targa(targa),
-      m_svincoloIngresso(svincoloIngresso),
-      m_svincoloUscita(svincoloUscita),
-      m_istantePartenza(istantePartenza) {}
+    : targa(targa),
+      svincoloIngresso(svincoloIngresso),
+      svincoloUscita(svincoloUscita),
+      istantePartenza(istantePartenza) {}
 
 const std::string& Veicolo::getTarga() const {
-    return m_targa;
+    return targa;
 }
 
 int Veicolo::getSvincoloIngresso() const {
-    return m_svincoloIngresso;
+    return svincoloIngresso;
 }
 
 int Veicolo::getSvincoloUscita() const {
-    return m_svincoloUscita;
+    return svincoloUscita;
 }
 
 double Veicolo::getIstantePartenza() const {
-    return m_istantePartenza;
+    return istantePartenza;
 }
 
 void Veicolo::aggiungiIntervallo(double velocitaKmH, double durataSecondi) {
-    m_profiloVelocita.emplace_back(velocitaKmH, durataSecondi);
+    profiloVelocita.emplace_back(velocitaKmH, durataSecondi);
 }
 
 const std::vector<std::pair<double, double>>& Veicolo::getProfiloVelocita() const {
-    return m_profiloVelocita;
+    return profiloVelocita;
 }
 
 double Veicolo::distanzaPercorsa() const {
     double distanza = 0.0;
 
-    for (const auto& intervallo : m_profiloVelocita) {
-        double velocita = intervallo.first;
-        double durata = intervallo.second;
+    for (size_t i = 0; i < profiloVelocita.size(); ++i) {
+        const auto& intervallo = profiloVelocita[i];
+        double velocita = intervallo.first; //primo elemento del pair
+        double durata = intervallo.second; //secondo elemento del pair
         distanza += velocita * (durata / 3600.0);
     }
-
     return distanza;
 }
